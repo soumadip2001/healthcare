@@ -38,4 +38,4 @@ jobs:
 
       # 5. Run Prettier check (without writing)
       - name: Check Prettier formatting
-        run: npx prettier --check .
+        run: npx prettier --write .
