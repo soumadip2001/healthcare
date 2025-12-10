@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AccountUserService } from './account-user.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto, LoginUserDto } from './dto/account-user.dto';
@@ -18,8 +18,7 @@ export class AccountUserController {
 
   @ApiOperation({ summary: 'Login to your Account' })
   @Post('login')
-  loginuser(@Body() reqBody:LoginUserDto) {
+  loginuser(@Body() reqBody: LoginUserDto) {
     return this.accountUserService.handleLogin(reqBody);
   }
-  
 }

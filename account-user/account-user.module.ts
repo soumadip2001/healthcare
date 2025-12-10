@@ -16,10 +16,10 @@ import { JwtService } from '@nestjs/jwt';
       { name: User.name, schema: UserSchema },
       { name: Roles.name, schema: RoleSchema },
     ]),
-  //  JwtService,
+    //  JwtService,
   ],
   controllers: [AccountUserController],
   providers: [AccountUserService, AccountUserRepository, JwtService],
-  exports: [AccountUserRepository]
+  exports: [AccountUserRepository],
 })
 export class AccountUserModule {}

@@ -20,9 +20,29 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api-docs', app, document); // Swagger will be available at /api-docs
 
+    interface MorganToken {
+      method: (req: any, res: any) => string;
+      url: (req: any, res: any) => string;
+      status: (req: any, res: any) => string;
+      res: (req: any, res: any, header: string) => string;
+      'response-time': (req: any, res: any) => string;
+      'remote-addr': (req: any, res: any) => string;
+      date: (req: any, res: any, format: string) => string;
+    }
+
+    interface LogEntry {
+      method: string;
+      url: string;
+      status: number;
+      contentLength: string | undefined;
+      responseTime: number;
+      remoteAddr: string;
+      date: string;
+    }
+
     app.use(
-      morgan((tokens, req, res) => {
-        return JSON.stringify({
+      morgan((tokens: MorganToken, req: any, res: any): string => {
+        const logEntry: LogEntry = {
           method: tokens.method(req, res),
           url: tokens.url(req, res),
           status: Number(tokens.status(req, res)),
@@ -30,7 +50,8 @@ async function bootstrap() {
           responseTime: Number(tokens['response-time'](req, res)),
           remoteAddr: tokens['remote-addr'](req, res),
           date: tokens.date(req, res, 'iso'),
-        });
+        };
+        return JSON.stringify(logEntry);
       }),
     );
 

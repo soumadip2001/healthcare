@@ -7,6 +7,8 @@ export class DatabaseService implements OnModuleInit {
     try {
       await this.connectDB();
     } catch (err) {
+      console.log(err);
+
       throw new Error('Method not implemented.');
     }
   }
@@ -17,8 +19,8 @@ export class DatabaseService implements OnModuleInit {
         'mongodb+srv://soumadippal30_db_user:G5QngIyKM83RypQo@healtcarecluster.erfcjki.mongodb.net/	',
       );
       console.log('Connected to MongoDB Atlas');
-    } catch (err) {
-      console.error('MongoDB connection failed:', err.message);
+    } catch (err: any) {
+      console.error('MongoDB connection failed:', err);
       process.exit(1);
     }
   }

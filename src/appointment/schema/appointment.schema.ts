@@ -15,7 +15,7 @@ export class Appointment {
   @Prop({ type: String })
   prescription: Types.ObjectId; // Optional staff assigned
 
-  @Prop({ type: String , required: false})
+  @Prop({ type: String, required: false })
   reason?: string; // Optional service booked
 
   @Prop({ required: true })

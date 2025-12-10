@@ -6,7 +6,7 @@ export class UpdateAppointmentDto {
   @ApiProperty({
     description: 'Patient ID who booked the appointment',
     type: String,
-    required: true
+    required: true,
   })
   @IsString()
   patientid: string;
@@ -25,7 +25,7 @@ export class UpdateAppointmentByADMINDoctorDto {
   @ApiProperty({
     description: 'Patient ID who booked the appointment',
     type: String,
-    required: true
+    required: true,
   })
   @IsString()
   patientid: string;
@@ -36,6 +36,6 @@ export class UpdateAppointmentByADMINDoctorDto {
     required: false,
   })
   @IsString()
-//   @IsOptional()
+  //   @IsOptional()
   prescription: string | null = null;
 }

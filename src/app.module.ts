@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AccountUserModule } from './account-user/account-user.module';
+import { AccountUserModule } from '../account-user/account-user.module';
 import { WebsocketsModule } from './websockets/websockets.module';
 import { DatabaseService } from './config/database.config';
 import { DatabaseModule } from './config/database.module';
@@ -27,12 +27,17 @@ import { RolesGuard } from './common/guard/role.guard';
     AppointmentModule,
   ],
   controllers: [AppController],
-  providers: [AppService, DatabaseService, JwtService,JwtAuthGuard, RolesGuard],
-  exports: [JwtService,JwtAuthGuard, RolesGuard],
+  providers: [
+    AppService,
+    DatabaseService,
+    JwtService,
+    JwtAuthGuard,
+    RolesGuard,
+  ],
+  exports: [JwtService, JwtAuthGuard, RolesGuard],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware)
-    .forRoutes(AppointmentController);
+    consumer.apply(AuthMiddleware).forRoutes(AppointmentController);
   }
 }

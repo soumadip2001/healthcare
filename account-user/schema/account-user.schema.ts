@@ -19,7 +19,7 @@ export class User extends Document {
   @Prop({ type: Types.ObjectId, ref: 'Role', required: true })
   roleId: Types.ObjectId;
 
-  @Prop({type: Boolean, default: true})
+  @Prop({ type: Boolean, default: true })
   active: boolean;
 }
 
