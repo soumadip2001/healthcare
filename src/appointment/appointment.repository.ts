@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Appointment } from './schema/appointment.schema';
 import { Model } from 'mongoose';
@@ -67,7 +67,7 @@ export class AppointmentRepository {
   }
 
   async createAppointment(appointmentInfo: appointmentInfo) {
-    // try {
+    try {
     const appointment = new this.appointmentModel({
       patientid: appointmentInfo.patientid,
       doctorid: appointmentInfo.doctorid,
@@ -82,9 +82,9 @@ export class AppointmentRepository {
 
     const savedAppointment = await appointment.save();
     return savedAppointment;
-    // } catch (err) {
-    //   throw new HttpException('error', 400);
-    // }
+    } catch (err) {
+      throw new HttpException('error', 400);
+    }
   }
 
   async getappointByid(id: string) {
