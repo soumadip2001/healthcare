@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: nestjs_app
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb+srv://soumadippal30_db_user:G5QngIyKM83RypQo@healtcarecluster.erfcjki.mongodb.net/	
+    depends_on:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  mongo:
+    container_name: mongo_db
+    image: mongo:6
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
