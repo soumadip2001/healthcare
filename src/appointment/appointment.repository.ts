@@ -68,20 +68,20 @@ export class AppointmentRepository {
 
   async createAppointment(appointmentInfo: appointmentInfo) {
     try {
-    const appointment = new this.appointmentModel({
-      patientid: appointmentInfo.patientid,
-      doctorid: appointmentInfo.doctorid,
-      appointmentdate: appointmentInfo.appointmentdate,
-      starttime: appointmentInfo.starttime, // "09:00"
-      endtime: appointmentInfo.endtime, // "09:30"
-      status: AppointmentStatus.Available,
-      reason: appointmentInfo.reason || '',
-      prescription: appointmentInfo.prescription || null,
-      isdeleted: false,
-    });
+      const appointment = new this.appointmentModel({
+        patientid: appointmentInfo.patientid,
+        doctorid: appointmentInfo.doctorid,
+        appointmentdate: appointmentInfo.appointmentdate,
+        starttime: appointmentInfo.starttime, // "09:00"
+        endtime: appointmentInfo.endtime, // "09:30"
+        status: AppointmentStatus.Available,
+        reason: appointmentInfo.reason || '',
+        prescription: appointmentInfo.prescription || null,
+        isdeleted: false,
+      });
 
-    const savedAppointment = await appointment.save();
-    return savedAppointment;
+      const savedAppointment = await appointment.save();
+      return savedAppointment;
     } catch (err) {
       throw new HttpException('error', 400);
     }
