@@ -28,7 +28,7 @@ export class AppointmentController {
   findAll() {
     return {
       error : false,
-      data : this.appointmentService.getListofAllDoctors();
+      data : this.appointmentService.getListofAllDoctors()
     }
   }
 
