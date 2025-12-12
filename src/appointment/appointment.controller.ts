@@ -26,7 +26,10 @@ export class AppointmentController {
   @ApiOperation({ summary: 'Patient can watch List of doctor' })
   @Get('doctor-list')
   findAll() {
-    return this.appointmentService.getListofAllDoctors();
+    return {
+      error : false,
+      data : this.appointmentService.getListofAllDoctors();
+    }
   }
 
   // appointment list for specific doctor
