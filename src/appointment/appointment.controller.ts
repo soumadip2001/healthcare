@@ -27,9 +27,9 @@ export class AppointmentController {
   @Get('doctor-list')
   findAll() {
     return {
-      error : false,
-      data : this.appointmentService.getListofAllDoctors()
-    }
+      error: false,
+      data: this.appointmentService.getListofAllDoctors(),
+    };
   }
 
   // appointment list for specific doctor
