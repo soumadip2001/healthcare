@@ -15,9 +15,12 @@ export class DatabaseService implements OnModuleInit {
 
   async connectDB() {
     try {
-      await mongoose.connect(
-        'mongodb+srv://soumadippal30_db_user:G5QngIyKM83RypQo@healtcarecluster.erfcjki.mongodb.net/	',
-      );
+      const uri = process.env.MONGO_URI;
+      if (!uri) {
+        console.error('MONGO_URI environment variable is not set');
+        process.exit(1);
+      }
+      await mongoose.connect(uri);
       console.log('Connected to MongoDB Atlas');
     } catch (err: any) {
       console.error('MongoDB connection failed:', err);

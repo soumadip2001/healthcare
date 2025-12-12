@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Appointment } from './schema/appointment.schema';
 import { Model } from 'mongoose';
@@ -67,24 +67,25 @@ export class AppointmentRepository {
   }
 
   async createAppointment(appointmentInfo: appointmentInfo) {
-    // try {
-    const appointment = new this.appointmentModel({
-      patientid: appointmentInfo.patientid,
-      doctorid: appointmentInfo.doctorid,
-      appointmentdate: appointmentInfo.appointmentdate,
-      starttime: appointmentInfo.starttime, // "09:00"
-      endtime: appointmentInfo.endtime, // "09:30"
-      status: AppointmentStatus.Available,
-      reason: appointmentInfo.reason || '',
-      prescription: appointmentInfo.prescription || null,
-      isdeleted: false,
-    });
+    try {
+      const appointment = new this.appointmentModel({
+        patientid: appointmentInfo.patientid,
+        doctorid: appointmentInfo.doctorid,
+        appointmentdate: appointmentInfo.appointmentdate,
+        starttime: appointmentInfo.starttime, // "09:00"
+        endtime: appointmentInfo.endtime, // "09:30"
+        status: AppointmentStatus.Available,
+        reason: appointmentInfo.reason || '',
+        prescription: appointmentInfo.prescription || null,
+        isdeleted: false,
+      });
 
-    const savedAppointment = await appointment.save();
-    return savedAppointment;
-    // } catch (err) {
-    //   throw new HttpException('error', 400);
-    // }
+      const savedAppointment = await appointment.save();
+      return savedAppointment;
+    } catch (err) {
+      Logger.error('error from create appointment ', err.stack);
+      throw new HttpException('error', 400);
+    }
   }
 
   async getappointByid(id: string) {
