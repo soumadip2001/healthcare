@@ -25,10 +25,10 @@ export class AppointmentController {
   //List of all doctor
   @ApiOperation({ summary: 'Patient can watch List of doctor' })
   @Get('doctor-list')
-  findAll() {
+  async findAll() {
     return {
       error: false,
-      data: this.appointmentService.getListofAllDoctors(),
+      data: await this.appointmentService.getListofAllDoctors(),
     };
   }
 
