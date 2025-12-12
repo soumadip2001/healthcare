@@ -12,7 +12,7 @@ on:
       - stg
 
 jobs:
-  lint:
+  build-and-lint:
     name: Run ESLint and Prettier
     runs-on: ubuntu-latest
 
