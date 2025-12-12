@@ -54,8 +54,8 @@ async function bootstrap() {
       }),
     );
     const port = process.env.PORT ?? 3000;
-    console.log("port ---", port);
-    
+    console.log('port ---', port);
+
     await app.listen(port);
   } catch (err) {
     Logger.log('Error from main.ts', err);
