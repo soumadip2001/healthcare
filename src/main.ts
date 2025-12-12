@@ -53,8 +53,10 @@ async function bootstrap() {
         transform: true,
       }),
     );
-
-    await app.listen(process.env.PORT ?? 3000);
+    const port = process.env.PORT ?? 3000;
+    console.log("port ---", port);
+    
+    await app.listen(port);
   } catch (err) {
     Logger.log('Error from main.ts', err);
     throw err;
