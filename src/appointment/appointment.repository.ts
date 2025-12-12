@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Appointment } from './schema/appointment.schema';
 import { Model } from 'mongoose';
@@ -83,6 +83,7 @@ export class AppointmentRepository {
       const savedAppointment = await appointment.save();
       return savedAppointment;
     } catch (err) {
+      Logger.error('error from create appointment ', err.stack);
       throw new HttpException('error', 400);
     }
   }
