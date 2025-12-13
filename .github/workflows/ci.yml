@@ -58,15 +58,17 @@ jobs:
       - name: Add EC2 host to known_hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H "EC2_HOST" >> ~/.ssh/known_hosts
+          ssh-keyscan -H "$EC2_HOST" >> ~/.ssh/known_hosts
         env: 
           EC2_HOST: ${{secrets.EC2_HOST}}
 
       
       - name: Write SSH Key
         run: |
-          echo "${ EC2_KEY }" > ec2_key.pem
+          echo "${EC2_KEY}" > ec2_key.pem
           chmod 600 ec2_key.pem
+        env:
+          EC2_KEY: ${{ secrets.EC2_KEY }}
       # -------------------------
       # Deploy on EC2
       # ssh -i ec2_key.pem ${EC2_USER}@${EC2_HOST} << 'EOF'
@@ -80,7 +82,7 @@ jobs:
           ssh -i ec2_key.pem ${ EC2_USER }@${ EC2_HOST } << EOF
             set -e
 
-            cd "${EC2_APP_DIR}"
+            cd "${EC2_APP_DIR}" || exit 1
 
             git fetch --all
             git reset --hard origin/master
