@@ -100,6 +100,6 @@ jobs:
             docker compose pull
             docker compose up -d --build
 
-            docker image prone
+            docker image prune -f
             docker compose ps
           EOF
