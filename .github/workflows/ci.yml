@@ -69,6 +69,14 @@ jobs:
           chmod 600 ec2_key.pem
         env:
           EC2_KEY: ${{ secrets.EC2_KEY }}
+
+        # -------------------------
+      # DEBUG SSH KEY (SAFE)
+      # -------------------------
+      - name: Debug SSH key
+        run: |
+          ls -l ec2_key.pem
+          ssh-keygen -l -f ec2_key.pem
       # -------------------------
       # Deploy on EC2
       # ssh -i ec2_key.pem ${EC2_USER}@${EC2_HOST} << 'EOF'
@@ -81,6 +89,8 @@ jobs:
         run: |
           ssh -i ec2_key.pem ${EC2_USER}@${EC2_HOST} << EOF
             set -e
+
+            echo "Connected to EC2"
 
             cd "${EC2_APP_DIR}" || exit 1
 
